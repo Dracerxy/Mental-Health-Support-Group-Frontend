@@ -6,7 +6,7 @@ const Login = () => {
       <div>
         <section className="vh-100" >
           <div className="container h-100">
-            <div className="row d-flex justify-content-center align-items-center h-100">
+            <div className="row d-flex justify-content-center h-100">
               <div className="col-lg-12 col-xl-11">
                 <div className="card text-black" style={{ border: 'none' }}>
                   <div className="card-body p-md-5">
@@ -33,9 +33,9 @@ const Login = () => {
                             </div>
                           </div>
 
-                          <div className="d-flex mx-4 mb-3 mb-lg-4">
-                            <p className='mr-5'><a href="#" class="link-dark link-offset-2 link-underline-opacity-0">Forgot your password</a></p>
-                            <button type="button" className="btn btn-primary btn-lg float-left">Submit</button>
+                          <div className="action d-flex align-items-center mx-1 mb-3 mb-lg-4" style={{gap: '33%'}}>
+                            <p className=''><a href="#" class="link-dark link-offset-2 link-underline-opacity-0">Forgot your password</a></p>
+                            <button type="button" className="btn btn-primary btn-lg d-flex justify-content-end">Submit</button>
                           </div>
 
                         </form>
