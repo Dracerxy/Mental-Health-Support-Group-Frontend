@@ -1,4 +1,5 @@
 import React from 'react'
+import './Signup.css'
 
 const Signup = () => {
     return (
@@ -56,7 +57,7 @@ const Signup = () => {
                                                 </div>
 
                                                 <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                                    <button type="button" className="btn btn-primary btn-lg">Register</button>
+                                                    <button type="button" className="btn button btn-lg">Register</button>
                                                 </div>
 
                                             </form>
