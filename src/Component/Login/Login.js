@@ -4,6 +4,10 @@ import {Link} from "react-router-dom";
 import { useNavigate } from 'react-router-dom'; 
 import { UserContext } from '../App';
 import CustomAlert from '../custom/CustomAlert'
+import React from 'react'
+import './Login.css'
+import GoogleLoginComponent from './GoogleLoginComponent';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 const Login = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
@@ -33,8 +37,15 @@ const Login = () => {
       setShowAlert(true);
     }
   }
+
+  const responseGoogle = (response) => {
+    console.log(response);
+  }
+
+  const Client_id = "532674940364-m4dhtbblhrptl5flflotn74mkcqiidg3.apps.googleusercontent.com";
+
   return (
-    <div>
+    <>
       <CustomAlert
         message={alertMessage}
         visible={showAlert}
@@ -61,6 +72,8 @@ const Login = () => {
                               <input type="email" id="form3Example3c" className="form-control" 
                                value={email} onChange={(e) => setEmail(e.target.value)}/>
                               <label className="form-label" for="form3Example3c">Your Email</label>
+                              <input type="email" id="form3Example3c" className="form-control" />
+                              <label className="form-label" htmlFor="form3Example3c">Your Email</label>
                             </div>
                           </div>
 
@@ -80,10 +93,26 @@ const Login = () => {
                               </Link>
                             </p>
                             <button type="submit" className="btn btn-primary btn-lg d-flex justify-content-end">Submit</button>
+                              <input type="password" id="form3Example4c" className="form-control" />
+                              <label className="form-label" htmlFor="form3Example4c">Password</label>
+                            </div>
+                          </div>
+
+
+                          <div className="action d-flex align-items-center justify-content-center mx-1 mb-3 mb-lg-4" style={{ width: '100%' }}>
+                            <GoogleOAuthProvider clientId={Client_id}>
+                              <GoogleLoginComponent />
+                            </GoogleOAuthProvider>
+                          </div>
+                          <div className="action d-flex align-items-center justify-content-center mx-1 mb-3 mb-lg-4" style={{ width: '100%' }}>
+
+                          </div>
+                          <div className="action d-flex align-items-center mx-1 mb-3 mb-lg-4" style={{ gap: '30%' }}>
+                            <p><a href="#" className="link-dark link-underline-opacity-0">Forgot your password</a></p>
+                            <button type="button" className="btn button btn-lg d-flex justify-content-end">Submit</button>
                           </div>
 
                         </form>
-
                       </div>
                     </div>
                   </div>
@@ -92,10 +121,9 @@ const Login = () => {
             </div>
           </div>
         </section>
-      </div>
+        </>
+   
+  )}
 
-    </div>
-  )
-}
 
 export default Login

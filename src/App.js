@@ -13,6 +13,12 @@ import ForgotPassword from './Component/password/ForgotPassword';
 import ResetPassword from './Component/password/ResetPassword';
 export const UserContext = createContext();
 
+import Login from './Component/Login/Login'
+import Signup from './Component/Signup/Signup'
+import Navbar from './Component/Navbar/Navbar';
+import Resources from './Component/Resources/Resources';
+import Chat from './Component/Chat/Chat';
+import Username from './Component/Username/Username';
 
 function App() {
   const [state,dispatch]=useReducer(reducer,initialState);

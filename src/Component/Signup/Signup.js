@@ -2,6 +2,8 @@ import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
+import './Signup.css'
+
 const Signup = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -70,6 +72,8 @@ const Signup = () => {
                                                         <input value={name} type="text" id="form3Example1c" className="form-control"
                                                          onChange={handlenameChange}/> 
                                                         <label className="form-label" for="form3Example1c">Your Name</label>
+                                                        <input type="text" id="form3Example1c" className="form-control" />
+                                                        <label className="form-label" htmlFor="form3Example1c">Your Name</label>
                                                     </div>
                                                 </div>
 
@@ -79,6 +83,8 @@ const Signup = () => {
                                                         <input value={email} type="email" id="form3Example3c" className="form-control"
                                                          onChange={handleemailChange}/> 
                                                         <label className="form-label" for="form3Example3c">Your Email</label>
+                                                        <input type="email" id="form3Example3c" className="form-control" />
+                                                        <label className="form-label" htmlFor="form3Example3c">Your Email</label>
                                                     </div>
                                                 </div>
 
@@ -88,6 +94,8 @@ const Signup = () => {
                                                         <input value={password} type="password" id="form3Example4c"  className={`form-control ${passwordsMatch ? '' : 'is-invalid'}`}
                                                          onChange={handlePasswordChange}/>
                                                         <label className="form-label" for="form3Example4c">Password</label>
+                                                        <input type="password" id="form3Example4c" className="form-control" />
+                                                        <label className="form-label" htmlFor="form3Example4c">Password</label>
                                                     </div>
                                                 </div>
 
@@ -98,6 +106,8 @@ const Signup = () => {
                                                        className={`form-control ${passwordsMatch ? '' : 'is-invalid'}`}
                                                        onChange={handleRepeatPasswordChange} />
                                                         <label className="form-label" for="form3Example4cd">Repeat your password</label>
+                                                        <input type="password" id="form3Example4cd" className="form-control" />
+                                                        <label className="form-label" htmlFor="form3Example4cd">Repeat your password</label>
                                                     </div>
                                                 </div>
                                                 {!passwordsMatch && (
@@ -108,13 +118,14 @@ const Signup = () => {
 
                                                 <div className="form-check d-flex justify-content-center mb-5">
                                                     <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
-                                                    <label className="form-check-label" for="form2Example3">
+                                                    <label className="form-check-label" htmlFor="form2Example3">
                                                         I agree all statements in <a href="#!">Terms of service</a>
                                                     </label>
                                                 </div>
 
                                                 <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                                     <button type="submit" className="btn btn-primary btn-lg">Register</button>
+                                                    <button type="button" className="btn button btn-lg">Register</button>
                                                 </div>
 
                                             </form>
