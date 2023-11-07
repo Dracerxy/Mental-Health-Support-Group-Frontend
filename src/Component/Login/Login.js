@@ -1,7 +1,17 @@
 import React from 'react'
 import './Login.css'
+import GoogleLoginComponent from './GoogleLoginComponent';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
 
 const Login = () => {
+
+  const responseGoogle = (response) => {
+    console.log(response);
+  }
+
+  const Client_id = "532674940364-m4dhtbblhrptl5flflotn74mkcqiidg3.apps.googleusercontent.com";
+
   return (
     <div>
       <div>
@@ -22,7 +32,7 @@ const Login = () => {
                             <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
                             <div className="form-outline flex-fill mb-0">
                               <input type="email" id="form3Example3c" className="form-control" />
-                              <label className="form-label" for="form3Example3c">Your Email</label>
+                              <label className="form-label" htmlFor="form3Example3c">Your Email</label>
                             </div>
                           </div>
 
@@ -30,12 +40,21 @@ const Login = () => {
                             <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                             <div className="form-outline flex-fill mb-0">
                               <input type="password" id="form3Example4c" className="form-control" />
-                              <label className="form-label" for="form3Example4c">Password</label>
+                              <label className="form-label" htmlFor="form3Example4c">Password</label>
                             </div>
                           </div>
 
-                          <div className="action d-flex align-items-center mx-1 mb-3 mb-lg-4" style={{gap: '30%'}}>
-                            <p><a href="#" class="link-dark link-underline-opacity-0">Forgot your password</a></p>
+
+                          <div className="action d-flex align-items-center justify-content-center mx-1 mb-3 mb-lg-4" style={{ width: '100%' }}>
+                            <GoogleOAuthProvider clientId={Client_id}>
+                              <GoogleLoginComponent />
+                            </GoogleOAuthProvider>
+                          </div>
+                          <div className="action d-flex align-items-center justify-content-center mx-1 mb-3 mb-lg-4" style={{ width: '100%' }}>
+
+                          </div>
+                          <div className="action d-flex align-items-center mx-1 mb-3 mb-lg-4" style={{ gap: '30%' }}>
+                            <p><a href="#" className="link-dark link-underline-opacity-0">Forgot your password</a></p>
                             <button type="button" className="btn button btn-lg d-flex justify-content-end">Submit</button>
                           </div>
 

@@ -21,7 +21,7 @@ const Signup = () => {
                                                     <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                                                     <div className="form-outline flex-fill mb-0">
                                                         <input type="text" id="form3Example1c" className="form-control" />
-                                                        <label className="form-label" for="form3Example1c">Your Name</label>
+                                                        <label className="form-label" htmlFor="form3Example1c">Your Name</label>
                                                     </div>
                                                 </div>
 
@@ -29,7 +29,7 @@ const Signup = () => {
                                                     <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                                     <div className="form-outline flex-fill mb-0">
                                                         <input type="email" id="form3Example3c" className="form-control" />
-                                                        <label className="form-label" for="form3Example3c">Your Email</label>
+                                                        <label className="form-label" htmlFor="form3Example3c">Your Email</label>
                                                     </div>
                                                 </div>
 
@@ -37,7 +37,7 @@ const Signup = () => {
                                                     <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                                                     <div className="form-outline flex-fill mb-0">
                                                         <input type="password" id="form3Example4c" className="form-control" />
-                                                        <label className="form-label" for="form3Example4c">Password</label>
+                                                        <label className="form-label" htmlFor="form3Example4c">Password</label>
                                                     </div>
                                                 </div>
 
@@ -45,13 +45,13 @@ const Signup = () => {
                                                     <i className="fas fa-key fa-lg me-3 fa-fw"></i>
                                                     <div className="form-outline flex-fill mb-0">
                                                         <input type="password" id="form3Example4cd" className="form-control" />
-                                                        <label className="form-label" for="form3Example4cd">Repeat your password</label>
+                                                        <label className="form-label" htmlFor="form3Example4cd">Repeat your password</label>
                                                     </div>
                                                 </div>
 
                                                 <div className="form-check d-flex justify-content-center mb-5">
                                                     <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
-                                                    <label className="form-check-label" for="form2Example3">
+                                                    <label className="form-check-label" htmlFor="form2Example3">
                                                         I agree all statements in <a href="#!">Terms of service</a>
                                                     </label>
                                                 </div>
