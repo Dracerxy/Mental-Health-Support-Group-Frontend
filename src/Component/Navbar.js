@@ -7,7 +7,8 @@ const Navbar = () => {
         // Clear user data from local storage or perform any other necessary cleanup.
         localStorage.removeItem('googleOAuthData');
         localStorage.removeItem('jwtToken');
-        dispatch({type:"USER",payload:false,username:""
+        localStorage.removeItem('username')
+        dispatch({type:"USER",payload:false
     })
       };
     

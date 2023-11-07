@@ -9,6 +9,8 @@ import Chat from './Component/Chat';
 import Username from './Component/Username';
 import { createContext, useReducer } from 'react';
 import { initialState,reducer } from '../src/reducer/UserReducer';
+import ForgotPassword from './Component/password/ForgotPassword';
+import ResetPassword from './Component/password/ResetPassword';
 export const UserContext = createContext();
 
 
@@ -25,6 +27,8 @@ function App() {
         <Route path="/username" element={<Username />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/forgot-password" element={<ForgotPassword/>} />
+        <Route path="/reset-password/:token/:email" element={<ResetPassword/>} />
       </Routes>
     </div>
     </UserContext.Provider>

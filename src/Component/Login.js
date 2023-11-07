@@ -74,7 +74,11 @@ const Login = () => {
                           </div>
 
                           <div className="action d-flex align-items-center mx-1 mb-3 mb-lg-4" style={{gap: '33%'}}>
-                            <p className=''><a href="#" class="link-dark link-offset-2 link-underline-opacity-0">Forgot your password</a></p>
+                          <p>
+                              <Link to="/forgot-password" className="link-dark link-offset-2 link-underline-opacity-0">
+                                Forgot your password
+                              </Link>
+                            </p>
                             <button type="submit" className="btn btn-primary btn-lg d-flex justify-content-end">Submit</button>
                           </div>
 
