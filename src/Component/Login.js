@@ -3,11 +3,18 @@ import axios from 'axios';
 import {Link} from "react-router-dom";
 import { useNavigate } from 'react-router-dom'; 
 import { UserContext } from '../App';
+import CustomAlert from '../custom/CustomAlert'
 const Login = () => {
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertType, setAlertType] = useState(''); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const {state,dispatch}=useContext(UserContext);
+  const handleCloseAlert = () => {
+    setShowAlert(false);
+  };
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -15,20 +22,25 @@ const Login = () => {
         email,
         password,
       });
-
-      // Handle successful login here (e.g., store JWT token, update user state)
-      // console.log('Login successful:', response.data);
+      localStorage.setItem('jwtToken', response.data.token);
+      localStorage.setItem('username', response.data.username);
       dispatch({type:"USER",payload:true})
-      alert('Login successful!');
       navigate('/');
     } catch (error) {
-      // Handle login error (e.g., display error message)
-      // console.error('Login failed:', error);
-      alert('Login failed!', error);
+      // alert('Login failed!', error);
+      setAlertMessage('Incorrect Username or Password!!');
+      setAlertType('failure');
+      setShowAlert(true);
     }
   }
   return (
     <div>
+      <CustomAlert
+        message={alertMessage}
+        visible={showAlert}
+        onClose={handleCloseAlert}
+        type={alertType}
+      />
       <div>
         <section className="vh-100" >
           <div className="container h-100">

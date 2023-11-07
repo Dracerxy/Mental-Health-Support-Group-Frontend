@@ -7,7 +7,8 @@ const Navbar = () => {
         // Clear user data from local storage or perform any other necessary cleanup.
         localStorage.removeItem('googleOAuthData');
         localStorage.removeItem('jwtToken');
-        dispatch({type:"USER",payload:false})
+        dispatch({type:"USER",payload:false,username:""
+    })
       };
     
     const RenderMenu =() =>{
@@ -25,7 +26,7 @@ const Navbar = () => {
                             <Link className="nav-link active" aria-current="page" to="/chat">Chat</Link>
                         </li>
                         <li className="nav-item mx-5">
-                            <Link className="nav-link active" aria-current="page" to="/username">Username</Link>
+                            <Link className="nav-link active" aria-current="page" to="/username">welcome , {localStorage.getItem('username')}</Link>
                         </li>
                     </ul>
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -43,7 +44,7 @@ const Navbar = () => {
             return(
                 <>
                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li className="nav-item mx-5">
+                        {/* <li className="nav-item mx-5">
                             <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                         </li>
                         <li className="nav-item mx-5">
@@ -51,10 +52,10 @@ const Navbar = () => {
                         </li>
                         <li className="nav-item mx-5">
                             <Link className="nav-link active" aria-current="page" to="/chat">Chat</Link>
-                        </li>
-                        <li className="nav-item mx-5">
+                        </li> */}
+                        {/* <li className="nav-item mx-5">
                             <Link className="nav-link active" aria-current="page" to="/username">Username</Link>
-                        </li>
+                        </li> */}
                     </ul>
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item mx-2">
