@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom";
 import { useNavigate } from 'react-router-dom'; 
-
+import { UserContext } from '../App';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
+  const {state,dispatch}=useContext(UserContext);
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -18,6 +18,7 @@ const Login = () => {
 
       // Handle successful login here (e.g., store JWT token, update user state)
       // console.log('Login successful:', response.data);
+      dispatch({type:"USER",payload:true})
       alert('Login successful!');
       navigate('/');
     } catch (error) {

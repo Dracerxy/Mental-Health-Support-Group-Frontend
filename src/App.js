@@ -7,9 +7,15 @@ import Navbar from './Component/Navbar';
 import Resources from './Component/Resources';
 import Chat from './Component/Chat';
 import Username from './Component/Username';
+import { createContext, useReducer } from 'react';
+import { initialState,reducer } from '../src/reducer/UserReducer';
+export const UserContext = createContext();
+
 
 function App() {
+  const [state,dispatch]=useReducer(reducer,initialState);
   return (
+    <UserContext.Provider value={{state,dispatch}}>
     <div>
       <Navbar />
       <Routes>
@@ -20,17 +26,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
-      {/* <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-            <Route path="blogs" element={<Blogs />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="*" element={<NoPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter> */}
     </div>
+    </UserContext.Provider>
   );
 }
 
