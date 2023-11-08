@@ -1,21 +1,24 @@
 import React, { useContext } from 'react'
 import './Navbar.css'
 import { Link } from 'react-router-dom'
-import { UserContext } from '../App'
+import { UserContext } from '../../App'
+import { useNavigate } from 'react-router-dom';
+
 const Navbar = () => {
-    const {state,dispatch} = useContext(UserContext);
+    const navigate = useNavigate();
+    const { state, dispatch } = useContext(UserContext);
     const handleLogout = () => {
         // Clear user data from local storage or perform any other necessary cleanup.
         localStorage.removeItem('googleOAuthData');
         localStorage.removeItem('jwtToken');
         localStorage.removeItem('username')
-        dispatch({type:"USER",payload:false
-    })
-      };
-    
-    const RenderMenu =() =>{
-        if(state){
-            return(
+        dispatch({ type: "USER", payload: false })
+        navigate('/login');
+    };
+
+    const RenderMenu = () => {
+        if (!state) {
+            return (
                 <>
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item mx-5">
@@ -42,10 +45,10 @@ const Navbar = () => {
                     </ul>
                 </>
             )
-        }else{
-            return(
+        } else {
+            return (
                 <>
-                <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         {/* <li className="nav-item mx-5">
                             <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                         </li>
@@ -81,7 +84,7 @@ const Navbar = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <RenderMenu/>
+                    <RenderMenu />
                 </div>
             </div>
         </nav>
