@@ -1,24 +1,29 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
-import {Link} from "react-router-dom";
-import { useNavigate } from 'react-router-dom'; 
-import { UserContext } from '../App';
-import CustomAlert from '../custom/CustomAlert'
-import React from 'react'
+import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../App';
+import CustomAlert from '../../custom/CustomAlert'
 import './Login.css'
 import GoogleLoginComponent from './GoogleLoginComponent';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+
+
 const Login = () => {
+
+
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
-  const [alertType, setAlertType] = useState(''); 
+  const [alertType, setAlertType] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const {state,dispatch}=useContext(UserContext);
+  const { state, dispatch } = useContext(UserContext);
   const handleCloseAlert = () => {
     setShowAlert(false);
   };
+
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -28,7 +33,7 @@ const Login = () => {
       });
       localStorage.setItem('jwtToken', response.data.token);
       localStorage.setItem('username', response.data.username);
-      dispatch({type:"USER",payload:true})
+      dispatch({ type: "USER", payload: true })
       navigate('/');
     } catch (error) {
       // alert('Login failed!', error);
@@ -38,9 +43,9 @@ const Login = () => {
     }
   }
 
-  const responseGoogle = (response) => {
-    console.log(response);
-  }
+  // const responseGoogle = (response) => {
+  //   console.log(response);
+  // }
 
   const Client_id = "532674940364-m4dhtbblhrptl5flflotn74mkcqiidg3.apps.googleusercontent.com";
 
@@ -69,10 +74,8 @@ const Login = () => {
                           <div className="d-flex flex-row align-items-center mb-4">
                             <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
                             <div className="form-outline flex-fill mb-0">
-                              <input type="email" id="form3Example3c" className="form-control" 
-                               value={email} onChange={(e) => setEmail(e.target.value)}/>
-                              <label className="form-label" for="form3Example3c">Your Email</label>
-                              <input type="email" id="form3Example3c" className="form-control" />
+                              <input type="email" id="form3Example3c" className="form-control"
+                                value={email} onChange={(e) => setEmail(e.target.value)} />
                               <label className="form-label" htmlFor="form3Example3c">Your Email</label>
                             </div>
                           </div>
@@ -80,25 +83,11 @@ const Login = () => {
                           <div className="d-flex flex-row align-items-center mb-4">
                             <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                             <div className="form-outline flex-fill mb-0">
-                              <input type="password" id="form3Example4c" className="form-control" 
-                              value={password} onChange={(e) => setPassword(e.target.value)}/>
+                              <input type="password" id="form3Example4c" className="form-control"
+                                value={password} onChange={(e) => setPassword(e.target.value)} />
                               <label className="form-label" for="form3Example4c">Password</label>
                             </div>
                           </div>
-
-                          <div className="action d-flex align-items-center mx-1 mb-3 mb-lg-4" style={{gap: '33%'}}>
-                          <p>
-                              <Link to="/forgot-password" className="link-dark link-offset-2 link-underline-opacity-0">
-                                Forgot your password
-                              </Link>
-                            </p>
-                            <button type="submit" className="btn btn-primary btn-lg d-flex justify-content-end">Submit</button>
-                              <input type="password" id="form3Example4c" className="form-control" />
-                              <label className="form-label" htmlFor="form3Example4c">Password</label>
-                            </div>
-                          </div>
-
-
                           <div className="action d-flex align-items-center justify-content-center mx-1 mb-3 mb-lg-4" style={{ width: '100%' }}>
                             <GoogleOAuthProvider clientId={Client_id}>
                               <GoogleLoginComponent />
@@ -107,11 +96,13 @@ const Login = () => {
                           <div className="action d-flex align-items-center justify-content-center mx-1 mb-3 mb-lg-4" style={{ width: '100%' }}>
 
                           </div>
-                          <div className="action d-flex align-items-center mx-1 mb-3 mb-lg-4" style={{ gap: '30%' }}>
-                            <p><a href="#" className="link-dark link-underline-opacity-0">Forgot your password</a></p>
-                            <button type="button" className="btn button btn-lg d-flex justify-content-end">Submit</button>
+                          <div className="action d-flex align-items-center mx-1 mb-lg-4" style={{ gap: '30%'}}>
+                            <p><Link to="/forgot-password" className="link-dark link-underline-opacity-0">Forgot your password</Link></p>
+                            <button type="submit" className="btn button btn-primary btn-lg d-flex justify-content-end">Submit</button>
                           </div>
-
+                          <div className="action d-flex align-items-center mb-lg-4" style={{ gap: '30%' }}>
+                            <p><Link to="/signup" className="link-dark link-underline-opacity-0">Register here</Link></p>
+                          </div>
                         </form>
                       </div>
                     </div>
@@ -120,10 +111,12 @@ const Login = () => {
               </div>
             </div>
           </div>
-        </section>
-        </>
-   
-  )}
+        </section >
+      </div >
+    </>
+
+  )
+}
 
 
 export default Login
