@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../../App';
 import CustomAlert from '../../custom/CustomAlert'
 import './Login.css'
 import GoogleLoginComponent from './GoogleLoginComponent';
@@ -11,14 +11,13 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const Login = () => {
 
-
+  const dispatch = useDispatch();
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertType, setAlertType] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { state, dispatch } = useContext(UserContext);
   const handleCloseAlert = () => {
     setShowAlert(false);
   };
@@ -31,15 +30,26 @@ const Login = () => {
         email,
         password,
       });
-      localStorage.setItem('jwtToken', response.data.token);
-      localStorage.setItem('username', response.data.username);
-      dispatch({ type: "USER", payload: true })
+      const token=response.data.token;
+      const usr=response.data.username
+      dispatch({ type:"AUTH", data: { usr, token ,id:false} });
       navigate('/');
+      window.location.reload();
     } catch (error) {
+      if(error.response.status === 404){
       // alert('Login failed!', error);
-      setAlertMessage('Incorrect Username or Password!!');
-      setAlertType('failure');
-      setShowAlert(true);
+        setAlertMessage('User Not Exists!!');
+        setAlertType('failure');
+        setShowAlert(true);
+      }else if(error.response.status ===401){
+        setAlertMessage('Password Incorrect!!');
+        setAlertType('failure');
+        setShowAlert(true);
+      }else{
+        setAlertMessage('Something Went Worng! Try Again Later!');
+        setAlertType('failure');
+        setShowAlert(true);
+      }
     }
   }
 

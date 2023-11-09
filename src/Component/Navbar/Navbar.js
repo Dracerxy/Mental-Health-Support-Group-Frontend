@@ -1,24 +1,49 @@
-import React, { useContext } from 'react'
+import React, {useState,useEffect } from 'react'
 import './Navbar.css'
 import { Link } from 'react-router-dom'
-import { UserContext } from '../../App'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import decode from 'jwt-decode'
+import profile_img from '../../img/icons8-person-30.png'
 
 const Navbar = () => {
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    const[username,setUsername]=useState('')
+    const[profile,setProfile]=useState(profile_img)
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { state, dispatch } = useContext(UserContext);
+    const location = useLocation();
     const handleLogout = () => {
-        // Clear user data from local storage or perform any other necessary cleanup.
-        localStorage.removeItem('googleOAuthData');
-        localStorage.removeItem('jwtToken');
-        localStorage.removeItem('username')
-        dispatch({ type: "USER", payload: false })
+        dispatch({ type:"LOGOUT" });
+        setUser(null);
         navigate('/login');
     };
+    useEffect(() => {
+        if(user?.id){
+        const token = user?.token;
+        const decodedToken = decode(token);
+        setUsername(decodedToken.given_name)
+        setProfile(decodedToken.picture)
+        if (decodedToken.exp * 1000 < new Date().getTime()) handleLogout();
+        setUser(JSON.parse(localStorage.getItem('profile')));
+      }else{
+        setUsername(user?.usr);
+        const token = user?.token;
+        if (token) {
+            const decodedToken = decode(token);
+            
+            if (decodedToken.exp * 1000 < new Date().getTime()) handleLogout();
+          }
+        setUser(JSON.parse(localStorage.getItem('profile')));
+      }}, [location]
+      );
+
 
     const RenderMenu = () => {
-        if (!state) {
+        
+        if(user){
             return (
+                
                 <>
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item mx-5">
@@ -31,7 +56,7 @@ const Navbar = () => {
                             <Link className="nav-link active" aria-current="page" to="/chat">Chat</Link>
                         </li>
                         <li className="nav-item mx-5">
-                            <Link className="nav-link active" aria-current="page" to="/username">welcome , {localStorage.getItem('username')}</Link>
+                            <Link className="nav-link active" aria-current="page" to="/username">welcome ,{username} <img height="25px" style={{borderRadius:50}} src={profile}></img></Link>
                         </li>
                     </ul>
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -41,15 +66,15 @@ const Navbar = () => {
                         <li className="nav-item mx-2">
                             <Link className="nav-link active text-success" aria-current="page" to="/signup">Signup</Link>
                         </li> */}
-                        <button className="btn btn-outline-success mx-2" type="submit" onClick={handleLogout}>Logout</button>
+                        <button className="btn btn-outline-success mx-2 text-light" type="submit" onClick={handleLogout}>Logout</button>
                     </ul>
-                </>
+                    </>
             )
-        } else {
-            return (
+        }else{
+            return(
                 <>
-                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                        {/* <li className="nav-item mx-5">
+                    {/* <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li className="nav-item mx-5">
                             <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                         </li>
                         <li className="nav-item mx-5">
@@ -60,8 +85,8 @@ const Navbar = () => {
                         </li> */}
                         {/* <li className="nav-item mx-5">
                             <Link className="nav-link active" aria-current="page" to="/username">Username</Link>
-                        </li> */}
-                    </ul>
+                        </li>
+                    </ul> */}
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item mx-2">
                             <Link className="nav-link active text-success" aria-current="page" to="/login">Login</Link>
@@ -75,11 +100,11 @@ const Navbar = () => {
 
             )
         }
-    }
+    }    
     return (
         <nav className="navbar navbar-expand-lg">
             <div className="container-fluid">
-                <a className="nav-brand" href="/">AppName</a>
+                <a className="nav-brand text-light" href="/">MindWell Connect</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

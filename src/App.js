@@ -7,30 +7,26 @@ import Navbar from './Component/Navbar/Navbar';
 import Resources from './Component/Resources/Resources';
 import Chat from './Component/Chat/Chat';
 import Username from './Component/Username/Username';
-import { createContext, useReducer } from 'react';
-import { initialState,reducer } from '../src/reducer/UserReducer';
 import ForgotPassword from './Component/password/ForgotPassword';
 import ResetPassword from './Component/password/ResetPassword';
-export const UserContext = createContext();
 
 function App() {
-  const [state,dispatch]=useReducer(reducer,initialState);
+  const user = JSON.parse(localStorage.getItem('profile'));
   return (
-    <UserContext.Provider value={{state,dispatch}}>
     <div>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/resources" element={<Resources />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/username" element={<Username />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/resources" element={user? <Resources/> :<Login/>} />
+        <Route path="/chat" element={user? <Chat/> :<Login/>} />
+        <Route path="/username" element={user? <Username/> :<Signup/>} />
+        <Route path="/login" element={user? <Home/> :<Login/>}/>
+        {/* <Route path="/login" exact component={() => (!user ? <Login /> : <Home/>)} /> */}
+        <Route path="/signup" element={user? <Home/> :<Signup/>} />
         <Route path="/forgot-password" element={<ForgotPassword/>} />
         <Route path="/reset-password/:token/:email" element={<ResetPassword/>} />
       </Routes>
     </div>
-    </UserContext.Provider>
   );
 }
 

@@ -2,14 +2,21 @@ import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import CustomAlert from '../../custom/CustomAlert'
 import './Signup.css'
 
 const Signup = () => {
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertType, setAlertType] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
     const navigate = useNavigate();
+    const handleCloseAlert = () => {
+        setShowAlert(false);
+      };
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -22,12 +29,20 @@ const Signup = () => {
 
             // Handle successful registration here (e.g., store JWT token, update user state)
             //   console.log('Registration successful:', response.data);
-            alert('Registration successful:', response.data);
+            setAlertMessage('Registration Success!!!');
+            setAlertType('failure');
+            setShowAlert(true);
             navigate('/');
         } catch (error) {
-            // Handle registration error (e.g., display error message)
-            //   console.error('Registration failed:', error);
-            alert('Registration failed:', error);
+            if(error.response.status===400){
+                setAlertMessage('User Already Exists!!!');
+                setAlertType('failure');
+                setShowAlert(true);
+            }else{
+                setAlertMessage('Something Went Worng! Try Again Later!!!');
+                setAlertType('failure');
+                setShowAlert(true);
+            }
         }
     }
     const handlenameChange = (e) => {
@@ -53,6 +68,12 @@ const Signup = () => {
 
     return (
         <div>
+            <CustomAlert
+        message={alertMessage}
+        visible={showAlert}
+        onClose={handleCloseAlert}
+        type={alertType}
+      />
             <section className="vh-100" >
                 <div className="container h-100">
                     <div className="row d-flex justify-content-center align-items-center h-100">

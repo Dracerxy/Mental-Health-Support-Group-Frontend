@@ -1,22 +1,46 @@
 import React, { useState } from 'react';
 import './ForgotPassword.css'
 import axios from 'axios';
+import CustomAlert from '../../custom/CustomAlert'
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertType, setAlertType] = useState('');
+  const handleCloseAlert = () => {
+    setShowAlert(false);
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post('http://localhost:4000/app/api/forgot-password', { email });
-      alert('Password reset email sent successfully');
+      setAlertMessage('Password Reset email set successfully!!');
+      setAlertType('success');
+      setShowAlert(true);
     } catch (error) {
-      alert('Failed to send password reset email');
+      if(error.response.status===400){
+        setAlertMessage('Error: User Not Found!!');
+        setAlertType('failure');
+        setShowAlert(true);
+      }else{
+        setAlertMessage('Something Went Worng! Try Again Later!!!');
+        setAlertType('failure');
+        setShowAlert(true);
+      }
     }
   };
 
   return (
     <div>
+            <CustomAlert
+        message={alertMessage}
+        visible={showAlert}
+        onClose={handleCloseAlert}
+        type={alertType}
+      />
       {/* <h2>Forgot Password</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
