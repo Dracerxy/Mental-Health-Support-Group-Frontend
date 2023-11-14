@@ -3,16 +3,38 @@ import { GoogleLogin as LoginButton } from '@react-oauth/google';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import decode from 'jwt-decode'
+import axios from 'axios';
 const GoogleLoginComponent = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSignIn = async (response) => {
     const result = response.clientId;
     const token = response.credential;
+    const data=decode(token);
+    const email=data.email;
+    const usr=data.given_name;
     try {
-      
-      dispatch({ type:"AUTH", data: { result, token,id:true} });
-      navigate('/home');
+      try {
+        const response = await axios.post('http://localhost:4000/app/signup', {
+            name:usr,
+            email:email,
+            password:token,
+            googleauth:true
+        });
+      } catch (error) {
+        if(error.response.status===400){
+            // setAlertMessage('User Already Exists!!!');
+            // setAlertType('failure');
+            // setShowAlert(true);
+        }else{
+            // setAlertMessage('Something Went Worng! Try Again Later!!!');
+            // setAlertType('failure');
+            // setShowAlert(true);
+        }
+    }
+
+      dispatch({ type:"AUTH", data: { result, token,id:true,email} });
+      navigate('/');
       window.location.reload();
     } catch (error) {
       console.log(error);

@@ -25,6 +25,10 @@ const ForgotPassword = () => {
         setAlertMessage('Error: User Not Found!!');
         setAlertType('failure');
         setShowAlert(true);
+      }else if(error.response.status===402){
+        setAlertMessage('User May Used Google Authentication For Login in!!');
+        setAlertType('failure');
+        setShowAlert(true);
       }else{
         setAlertMessage('Something Went Worng! Try Again Later!!!');
         setAlertType('failure');

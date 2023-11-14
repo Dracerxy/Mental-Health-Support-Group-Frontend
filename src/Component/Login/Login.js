@@ -32,7 +32,7 @@ const Login = () => {
       });
       const token=response.data.token;
       const usr=response.data.username
-      dispatch({ type:"AUTH", data: { usr, token ,id:false} });
+      dispatch({ type:"AUTH", data: { usr, token ,id:false,email:response.data.email }});
       navigate('/');
       window.location.reload();
     } catch (error) {
@@ -43,6 +43,10 @@ const Login = () => {
         setShowAlert(true);
       }else if(error.response.status ===401){
         setAlertMessage('Password Incorrect!!');
+        setAlertType('failure');
+        setShowAlert(true);
+      }else if(error.response.status===402){
+        setAlertMessage('User May Used Google Authentication For Login in!!');
         setAlertType('failure');
         setShowAlert(true);
       }else{
