@@ -33,7 +33,7 @@ const GoogleLoginComponent = () => {
         }
     }
 
-      dispatch({ type:"AUTH", data: { result, token,id:true,email} });
+      dispatch({ type:"AUTH", data: { result, token,id:true,email,usr} });
       navigate('/');
       window.location.reload();
     } catch (error) {
