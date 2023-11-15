@@ -15,7 +15,7 @@ const LandingPage = () => {
                 }else
                     Promise.reject();
             })
-            .catch((err) => alert(err))
+            .catch((err) => console.log(err))
     }, [])
     
 
