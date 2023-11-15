@@ -11,9 +11,9 @@ const Post = (props) => {
     const hasLikedPost = likes.find((email) => email === userId);
     
     const addComment = () => {
-        const comment=document.createElement('textarea');
-        comment.rows='1'
-        comment.placeholder="Add comment..." ;
+        const comment = document.createElement('textarea');
+        comment.rows = '1'
+        comment.placeholder = "Add comment...";
         document.getElementById('ico').appendChild(comment);
     }
     const RenderImg = () =>{
