@@ -1,34 +1,35 @@
 import React from 'react'
+import { useEffect,useState } from 'react'
 import Post from './../Posts/Post'
 import './LandingPage.css'
+import Axios from 'axios'
 
 const LandingPage = () => {
+    const [arr, setArr] = useState([]);
+    useEffect(() => {
+        Axios.get("http://localhost:4000/post/")
+            .then((res) => {
+                if (res.status === 200){
+                    setArr(res.data)
+                    console.log(res.data)
+                }else
+                    Promise.reject();
+            })
+            .catch((err) => console.log(err))
+    }, [])
     
+
+    const ListPost = () => {
+        return arr.map((val, ind) => { 
+            return <Post key={ind} obj={val} />
+        })
+    }
 
     return (
         <div>
             <div className="conatiner">
                 <div className="row">
-                    {/* while(count<15) {
-                        
-                        
-                    <div className="col my-3"><Post id={index} /></div>
-                    } */}
-                    <div className="col-md-6 my-3"><Post /></div>
-                    <div className="col-md-6 my-3"><Post /></div>
-                    <div className="col-md-6 my-3"><Post /></div>
-                    <div className="col-md-6 my-3"><Post /></div>
-                    <div className="col-md-6 my-3"><Post /></div>
-                    <div className="col-md-6 my-3"><Post /></div>
-                    <div className="col-md-6 my-3"><Post /></div>
-                    <div className="col-md-6 my-3"><Post /></div>
-                    <div className="col-md-6 my-3"><Post /></div>
-                    <div className="col-md-6 my-3"><Post /></div>
-                    <div className="col-md-6 my-3"><Post /></div>
-                    <div className="col-md-6 my-3"><Post /></div>
-                    <div className="col-md-6 my-3"><Post /></div>
-                    <div className="col-md-6 my-3"><Post /></div>
-                    <div className="col-md-6 my-3"><Post /></div>
+                    <ListPost/>
                 </div>
             </div>
         </div>

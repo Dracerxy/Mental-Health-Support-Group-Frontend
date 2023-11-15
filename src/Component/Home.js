@@ -9,7 +9,9 @@ const Home = () => {
     <div className="container-fluid">
       <div class="row">
         <div className="col-9 col-home">
+          <div className='row'>
           <LandingPage />
+          </div>
         </div>
         <div className="col col-chat">
           <SendPost />
