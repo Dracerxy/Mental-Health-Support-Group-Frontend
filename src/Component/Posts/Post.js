@@ -1,35 +1,55 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Post.css'
+import axios from 'axios'
 
 const Post = (props) => {
     const {_id,title,message,name,creator,selectedFile,likes,comments, createdAt} = props.obj;
     const user = JSON.parse(localStorage.getItem('profile'));
-    const countLike = () => {
-        document.getElementById('heart').style.color = 'red';
-        setCount(count + 1);
-    }
+    const [count, setCount] = useState(likes.length);
+    const userId=user?.email;
+    const hasLikedPost = likes.find((email) => email === userId);
+    
     const addComment = () => {
         const comment=document.createElement('textarea');
         comment.rows='1'
         comment.placeholder="Add comment..." ;
         document.getElementById('ico').appendChild(comment);
-        // setCount(count + 1);
     }
-
-    const [count, setCount] = useState(0);
-
     const RenderImg = () =>{
         if(selectedFile!=""){
             return(
-                <img className="card-img-top" src={selectedFile} alt="Card image cap" />
+                <img className="card-img-top" src={selectedFile} alt="" height="300px" width="1px" />
+            )
+        }
+    }
+    const handleLike = async (e) => {
+        e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:4000/post/like-post', {
+        _id,email:userId
+      });
+      setCount(likes.length)
+    } catch (error) {
+        alert(error)
+      } 
+    };
+    const RenderLike=()=>{
+        if(hasLikedPost){
+        return(
+            <i id='heart' className="fa-solid fa-heart heart-icon m-2 p-2" style={{color:"red"}} onClick={handleLike}>{count}</i>
+        )
+        }else{
+            return(
+            <i id='heart' className="fa-solid fa-heart heart-icon m-2 p-2" onClick={handleLike}>{count}</i>
             )
         }
     }
     const RenderAction =()=>{
         if(user){
             return(
+                
                 <div id='ico' className="icons">
-                        <i id='heart' className="fa-solid fa-heart heart-icon m-2 p-2" onClick={countLike}>{(count == 0) ? '' : count}</i>
+                        <RenderLike/>
                         <i className="fa-regular fa-comment m-2" onClick={addComment} ></i>
                         <i className="fa-solid fa-share m-2"></i>
                 </div>
@@ -45,7 +65,6 @@ const Post = (props) => {
                 <RenderImg/>
                 <div className="card-body">
                     <p className="card-text">{message}</p>
-                    {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
                     <RenderAction/>
                 </div>
             </div>
