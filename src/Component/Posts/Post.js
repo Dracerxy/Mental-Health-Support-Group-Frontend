@@ -31,7 +31,6 @@ const Post = (props) => {
       });
       setCount(likes.length)
     } catch (error) {
-        alert(error)
       } 
     };
     const RenderLike=()=>{
@@ -59,11 +58,12 @@ const Post = (props) => {
     }
 
     return (
-        <div>
+        <div className='col-9 mt-5'>
             <div className="card" style={{ width: '100%', border: '1px solid var(--dark)' }} >
 
                 <h5 className="card-title"><i className="fa-regular fa-user m-2"></i>{name}.{moment(createdAt).fromNow()}</h5>
                 <RenderImg/>
+                <p className="card-text">{title}</p>
                 <div className="card-body">
                     <p className="card-text">{message}</p>
                     <RenderAction/>
