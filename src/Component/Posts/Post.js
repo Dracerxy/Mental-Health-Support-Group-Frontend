@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Post.css'
 import axios from 'axios'
+import moment from 'moment';
 
 const Post = (props) => {
     const {_id,title,message,name,creator,selectedFile,likes,comments, createdAt} = props.obj;
@@ -61,7 +62,7 @@ const Post = (props) => {
         <div>
             <div className="card" style={{ width: '100%', border: '1px solid var(--dark)' }} >
 
-                <h5 className="card-title"><i className="fa-regular fa-user m-2"></i>{name}</h5>
+                <h5 className="card-title"><i className="fa-regular fa-user m-2"></i>{name}.{moment(createdAt).fromNow()}</h5>
                 <RenderImg/>
                 <div className="card-body">
                     <p className="card-text">{message}</p>
