@@ -8,9 +8,9 @@ const Post = (props) => {
         setCount(count + 1);
     }
     const addComment = () => {
-        const comment=document.createElement('textarea');
-        comment.rows='1'
-        comment.placeholder="Add comment..." ;
+        const comment = document.createElement('textarea');
+        comment.rows = '1'
+        comment.placeholder = "Add comment...";
         document.getElementById('ico').appendChild(comment);
         // setCount(count + 1);
     }

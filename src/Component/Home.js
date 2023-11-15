@@ -1,7 +1,7 @@
 import React from 'react'
 import './Home.css'
-import Chat from './Chat/Chat'
 import LandingPage from './LandingPage/LandingPage'
+import SendPost from './SendPost/SendPost'
 
 const Home = () => {
 
@@ -12,7 +12,7 @@ const Home = () => {
           <LandingPage />
         </div>
         <div className="col col-chat">
-          <Chat />
+          <SendPost />
         </div>
       </div>
     </div>
