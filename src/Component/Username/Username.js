@@ -1,11 +1,8 @@
 import React from 'react'
-
+import PostHistory from '../MyPost/PostHistory'
 const Username = () => {
   return (
-    <div>
-      <h1>I am Username</h1>
-    </div>
+    <PostHistory/>
   )
 }
-
 export default Username

@@ -17,7 +17,6 @@ const LandingPage = () => {
             })
             .catch((err) => console.log(err))
     }, [])
-    
 
     const ListPost = () => {
         return arr.map((val, ind) => { 

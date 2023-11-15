@@ -1,31 +1,32 @@
 import React from 'react'
 import MyPost from './MyPost'
+import { useState } from 'react';
+import { useEffect } from 'react';
+import Axios from'axios';
 
 const PostHistory = () => {
+    const user = JSON.parse(localStorage.getItem('profile'));
+    const [arr, setArr] = useState([]);
+    useEffect(() => {
+        Axios.get("http://localhost:4000/post/user-post/"+user.email)
+            .then((res) => {
+                if (res.status === 200){
+                    setArr(res.data)
+                }else
+                    Promise.reject();
+            })
+            .catch((err) => alert(err))
+    }, [])
+
+    const ListPost = () => {
+        return arr.map((val, ind) => { 
+            return <MyPost key={ind} obj={val} />
+        })
+    }
     return (
         <div className='container'>
             <div className="row" style={{paddingTop: '80px'}}>
-                <div className="col-md-4 my-3">
-                    <MyPost />
-                </div>
-                <div className="col-md-4 my-3">
-                    <MyPost />
-                </div>
-                <div className="col-md-4 my-3">
-                    <MyPost />
-                </div>
-                <div className="col-md-4 my-3">
-                    <MyPost />
-                </div>
-                <div className="col-md-4 my-3">
-                    <MyPost />
-                </div>
-                <div className="col-md-4 my-3">
-                    <MyPost />
-                </div>
-                <div className="col-md-4 my-3">
-                    <MyPost />
-                </div>
+                <ListPost/>
             </div>
         </div>
     )

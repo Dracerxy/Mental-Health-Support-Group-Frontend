@@ -17,6 +17,7 @@ const Navbar = () => {
         dispatch({ type: "LOGOUT" });
         setUser(null);
         navigate('/login');
+        window.location.reload();
     };
     useEffect(() => {
         if (user?.id) {
