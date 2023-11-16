@@ -24,11 +24,14 @@ const PostHistory = () => {
         })
     }
     return (
+        <>
         <div className='container'>
+            <h1 className='text-center mt-4'>User Post History</h1>
             <div className="row" style={{paddingTop: '80px'}}>
                 <ListPost/>
             </div>
         </div>
+        </>
     )
 }
 
