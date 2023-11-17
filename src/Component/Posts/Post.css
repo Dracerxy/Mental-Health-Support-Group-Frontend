@@ -1,0 +1,12 @@
+.card{
+    background-color: var(--dark) !important;
+}
+.card-title{
+    color: white !important;
+}
+.card-body{
+    background-color: var(--light);
+}
+.icons i{
+    cursor: pointer;
+}

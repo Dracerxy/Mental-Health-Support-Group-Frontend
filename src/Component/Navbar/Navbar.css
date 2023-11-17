@@ -1,6 +1,10 @@
 .navbar{
-    background-color: #297194;
+    background-color: var(--dark);
     font-weight: bolder;
+    width: 100%;
+    z-index: 1;
+    /* position: fixed; */
+    height: 4em;
 }
 .nav-link, .navbar-brand{
     color: white !important;
