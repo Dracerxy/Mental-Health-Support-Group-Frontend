@@ -19,7 +19,8 @@ const GoogleLoginComponent = () => {
             name:usr,
             email:email,
             password:token,
-            googleauth:true
+            googleauth:true,
+            profilePicture:data.picture
         });
       } catch (error) {
         if(error.response.status===400){

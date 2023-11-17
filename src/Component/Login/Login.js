@@ -30,7 +30,7 @@ const Login = () => {
         password,
       });
       const token=response.data.token;
-      const usr=response.data.username
+      const usr=response.data.username;
       dispatch({ type:"AUTH", data: { usr, token ,id:false,email:response.data.email }});
       navigate('/');
       window.location.reload();

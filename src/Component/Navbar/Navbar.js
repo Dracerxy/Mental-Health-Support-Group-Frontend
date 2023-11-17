@@ -20,11 +20,12 @@ const Navbar = () => {
         window.location.reload();
     };
     useEffect(() => {
+        
         if (user?.id) {
             const token = user?.token;
             const decodedToken = decode(token);
             setUsername(decodedToken.given_name)
-            setProfile(decodedToken.picture)
+            setProfile(user.profilePicture)
             if (decodedToken.exp * 1000 < new Date().getTime()) handleLogout();
             setUser(JSON.parse(localStorage.getItem('profile')));
         } else {
@@ -32,7 +33,9 @@ const Navbar = () => {
             const token = user?.token;
             if (token) {
                 const decodedToken = decode(token);
-
+                if(!user.profilePicture===null){
+                    setProfile(user.profilePicture)
+                }
                 if (decodedToken.exp * 1000 < new Date().getTime()) handleLogout();
             }
             setUser(JSON.parse(localStorage.getItem('profile')));
