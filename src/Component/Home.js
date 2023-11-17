@@ -3,6 +3,7 @@ import './Home.css'
 import LandingPage from './LandingPage/LandingPage'
 import SendPost from './SendPost/SendPost'
 
+
 const Home = () => {
 
   return (
