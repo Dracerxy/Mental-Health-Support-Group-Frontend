@@ -125,12 +125,6 @@ const MyPost = (props) => {
                         onChange={handleContent}
                     ></textarea>
                     <label>Image:</label>
-                    {/* <input
-                        type="file"
-                        name="image"
-                        accept="image/*"
-                        onChange={handleInputChange}
-                    /> */}
                     <FileBase type="file" multiple={false} onDone={handleFileChange} />
                          {images && (<div><img className='justify-content-center p-3'style={{ width: '70%', height: '100%' }}src={newselectedFile} alt="Preview Image"/>  </div>)}
                          <button type="button" className='btn btn-danger' onClick={() => handleDiscard()}>

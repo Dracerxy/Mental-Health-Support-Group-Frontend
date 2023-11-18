@@ -75,7 +75,7 @@ const UserProfile = () => {
       });
       console.log('User data updated successfully');
     } catch (error) {
-      alert(error)
+      
     }
   };
 
