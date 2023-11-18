@@ -40,7 +40,7 @@ const MyPost = (props) => {
     const updatePost = async () => {
         try {
             const response = await axios.post(
-                `http://localhost:4000/post/update-post/${_id}`,{
+                `https://mindwell-connect-backend.onrender.com/post/update-post/${_id}`,{
                     title:uptitle,
                     message:content,
                     selectedFile:images
@@ -58,7 +58,7 @@ const MyPost = (props) => {
     const deletePost = async () => {
         try {
             const response = await axios.delete(
-                'http://localhost:4000/post/delete-post/' + _id
+                'https://mindwell-connect-backend.onrender.com/post/delete-post/' + _id
             );
             if (response.status === 200) {
                 window.location.reload();

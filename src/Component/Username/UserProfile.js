@@ -23,9 +23,9 @@ const UserProfile = () => {
   };
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchUserData = async (e) => {
       try {
-        const response = await axios.get('http://localhost:4000/app/users/' + user.email);
+        const response = await axios.get('https://mindwell-connect-backend.onrender.com/app/users/' + user.email);
         const data = response.data;
 
         console.log('Response data:', data);
@@ -65,9 +65,9 @@ const UserProfile = () => {
   const handleExpertChange = (value) => {
     setexpert(value);
   };
-  const handleSaveChanges = async () => {
+  const handleSaveChanges = async (e) => {
     try {
-      await axios.put('http://localhost:4000/app/update-users/' + user.email, {
+      await axios.put('https://mindwell-connect-backend.onrender.com/app/update-users/' + user.email, {
         name,
         bioData: bio,
         expert,
@@ -75,7 +75,7 @@ const UserProfile = () => {
       });
       console.log('User data updated successfully');
     } catch (error) {
-      
+      alert("please wait!!!")
     }
   };
 

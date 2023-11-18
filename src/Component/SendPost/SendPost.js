@@ -43,7 +43,7 @@ const SendPost = () => {
     const CreatePost = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:4000/post/new-post', {
+            const response = await axios.post('https://mindwell-connect-backend.onrender.com/post/new-post', {
                 title,
                 message: content,
                 name: user.usr,

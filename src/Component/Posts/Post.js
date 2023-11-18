@@ -28,7 +28,7 @@ const Post = (props) => {
     useEffect(() => {
         const fetchUserData = async () => {
           try {
-            const response = await axios.get('http://localhost:4000/app/users/' + creator);
+            const response = await axios.get('https://mindwell-connect-backend.onrender.com/app/users/' + creator);
             const data = response.data;
     
             console.log('Response data:', data);
@@ -50,7 +50,7 @@ const Post = (props) => {
     
         // Call the fetchUserData function
         fetchUserData();
-      }, [user.email]);
+      }, [creator]);
 
 
     const handleCloseAlert = () => {
@@ -67,7 +67,7 @@ const Post = (props) => {
     const submitComment = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put('http://localhost:4000/post/comment-post/' + _id, {
+            const response = await axios.put('https://mindwell-connect-backend.onrender.com/post/comment-post/' + _id, {
                 text: commentText,
                 username: user.usr,
                 email: user.email
@@ -95,7 +95,7 @@ const Post = (props) => {
     const handleLike = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:4000/post/like-post', {
+            const response = await axios.post('https://mindwell-connect-backend.onrender.com/post/like-post', {
                 _id, email: userId
             });
             setCount(likes.length)
@@ -126,7 +126,7 @@ const Post = (props) => {
         }
     }
     function deletecomment(commentId) {
-        axios.delete(`http://localhost:4000/post/delete-comment/${_id}/${commentId}`)
+        axios.delete(`https://mindwell-connect-backend.onrender.com/post/delete-comment/${_id}/${commentId}`)
             .then(response => {
                 setAlertMessage('Comment deleted successfully:');
                 setAlertType('success');

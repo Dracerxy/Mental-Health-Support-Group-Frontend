@@ -21,7 +21,7 @@ const Signup = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:4000/app/signup', {
+            const response = await axios.post('https://mindwell-connect-backend.onrender.com/app/signup', {
                 name,
                 email,
                 password,

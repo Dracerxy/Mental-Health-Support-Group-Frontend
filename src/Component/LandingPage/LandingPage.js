@@ -7,7 +7,7 @@ import Axios from 'axios'
 const LandingPage = () => {
     const [arr, setArr] = useState([]);
     useEffect(() => {
-        Axios.get("http://localhost:4000/post/")
+        Axios.get("https://mindwell-connect-backend.onrender.com/post/")
             .then((res) => {
                 if (res.status === 200){
                     setArr(res.data)

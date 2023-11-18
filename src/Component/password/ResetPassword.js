@@ -28,7 +28,7 @@ const ResetPassword = () => {
       return;
     }else{
       try {
-      await axios.post('http://localhost:4000/app/api/reset-password', {femail,ftoken, newPassword: password });
+      await axios.post('https://mindwell-connect-backend.onrender.com/app/api/reset-password', {femail,ftoken, newPassword: password });
       setAlertMessage('Password Has Reseted  successfully!!');
       setAlertType('success');
       setShowAlert(true);

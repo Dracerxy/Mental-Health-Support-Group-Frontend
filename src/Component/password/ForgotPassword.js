@@ -16,7 +16,7 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:4000/app/api/forgot-password', { email });
+      await axios.post('https://mindwell-connect-backend.onrender.com/app/api/forgot-password', { email });
       setAlertMessage('Password Reset email set successfully!!');
       setAlertType('success');
       setShowAlert(true);

@@ -15,7 +15,7 @@ const GoogleLoginComponent = () => {
     const usr=data.given_name;
     try {
       try {
-        const response = await axios.post('http://localhost:4000/app/signup', {
+        const response = await axios.post('https://mindwell-connect-backend.onrender.com/app/signup', {
             name:usr,
             email:email,
             password:token,
