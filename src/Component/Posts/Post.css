@@ -10,3 +10,23 @@
 .icons i{
     cursor: pointer;
 }
+.mt-3{
+    background-color: var(--light) !important;
+}
+.btn-link{
+    text-decoration: none;
+}
+.mt-3-comment{
+    margin: 10px !important;
+
+}
+.mt-3 h6{
+    background-color: var(--dark) !important;
+    color: white;
+    margin: 0;
+}
+.mt-3 p{
+    margin: 0;
+    background-color: var(--lighter) !important;
+    /* color: ; */
+}

@@ -61,7 +61,7 @@ const Navbar = () => {
                             <Link className="nav-link active" aria-current="page" to="/chat">Chat</Link>
                         </li>
                         <li className="nav-item mx-5">
-                            <Link className="nav-link active" aria-current="page" to="/username">welcome ,{username} <img height="25px" style={{ borderRadius: 50 }} src={profile}></img></Link>
+                            <Link className="nav-link active" aria-current="page" to="/username">Welcome ,{username} <img height="25px" style={{ borderRadius: 50 }} src={profile}></img></Link>
                         </li>
                     </ul>
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
