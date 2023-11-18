@@ -15,9 +15,11 @@ section{
     align-items: center;
     justify-content: space-evenly;
 }
-.card{
+.res-card{
     border-radius: 14px;
     box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    color: white;
+    background-color: var(--lighter) !important;
 }
 .resource-item{
     margin-left:3%;
@@ -43,7 +45,8 @@ section{
     color: whitesmoke;
     font-family: poppins;
 }
-h1{
+.resources-page h1{
+    color: var(--dark);
     padding-top: 50px;
     margin-left: 38%;
     font-family: poppins;
@@ -54,20 +57,26 @@ h2{
     font-size: 32px;
     font-family: poppins;
 }
+.blogs h2{
+    color: var(--dark);
+}
 .card h3{
     font-size: 22px;
     padding: 20px;
     font-family: poppins;
 }
-.card p{
+.res-card p{
     font-size: 18px;
     text-align: center;
     font-family: poppins;
 }
-.card a{
+.res-card a{
     padding: 2%;
     text-decoration: none;
     text-align: center;
     font-size: 17px;
     font-weight: 600;
+    background-color: black;
+    margin: 3%;
+    color: white;
 }
