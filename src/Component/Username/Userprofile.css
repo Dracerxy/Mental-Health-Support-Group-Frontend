@@ -9,6 +9,7 @@
 }
 .card .card-header {
     font-weight: 500;
+    color: white;
 }
 .card-header:first-child {
     border-radius: 0.35rem 0.35rem 0 0;
