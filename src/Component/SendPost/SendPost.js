@@ -83,10 +83,14 @@ const SendPost = () => {
                 <div className="post-image justify-content-center my-3">
                     <div className='justify-content-center' style={{ width: '80%', height: '80%' }}>
                         <FileBase type="file" multiple={false} onDone={handleFileChange} />
-                        {images && (<div><img className='justify-content-center p-3' style={{ width: '70%', height: '100%' }} src={selectedFile.base64} alt="Preview Image" />  </div>)}
-                        <button type="button" className='btn btn-danger my-2' onClick={() => handleDiscard()}>
-                            Discard
-                        </button>
+                        {images && (
+                            <div>
+                                <img className='justify-content-center p-3' style={{ width: '70%', height: '100%' }} src={selectedFile.base64} alt="Preview Image" />
+                                <button type="button" className='btn btn-danger my-2' onClick={() => handleDiscard()}>
+                                    Discard
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
                 <div>

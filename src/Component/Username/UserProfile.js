@@ -1,12 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import './Userprofile.css'
+import FileBase from 'react-file-base64';
 import axios from 'axios'
 const UserProfile = () => {
   const user = JSON.parse(localStorage.getItem('profile'));
   const [name, setname] = useState('')
   const [email, setemail] = useState('')
   const [bio, setbio] = useState('')
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [images, setImages] = useState('');
   const [expert, setexpert] = useState(false)
+
+  const handleFileChange = (file) => {
+    // `file.base64` contains the base64 representation of the selected file
+    setSelectedFile(file);
+    setImages(file.base64)
+};
+
+  const handleDiscard = () => {
+    setSelectedFile(null);
+    setImages('');
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -22,6 +36,7 @@ const UserProfile = () => {
           setemail(userData.email);
           setexpert(userData.expert);
           setbio(userData.bioData);
+          setImages(userData.profilePicture)
         } else {
           alert('User not found');
         }
@@ -55,11 +70,12 @@ const UserProfile = () => {
       await axios.put('http://localhost:4000/app/update-users/' + user.email, {
         name,
         bioData: bio,
-        expert
+        expert,
+        profilePicture:images
       });
       console.log('User data updated successfully');
     } catch (error) {
-
+      alert(error)
     }
   };
 
@@ -72,15 +88,8 @@ const UserProfile = () => {
           <div className="card mb-4 mb-xl-0">
             <div className="card-header">Profile Picture</div>
             <div className="card-body text-center">
-              <img className="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
-<<<<<<< HEAD
-              {/* <div className="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div> */}
+              <img className="img-account-profile rounded-circle mb-2" alt="http://bootdey.com/img/Content/avatar/avatar1.png" src={images||"http://bootdey.com/img/Content/avatar/avatar1.png"} />
               <h3>{name}</h3>
-              <button className="btn btn-primary" type="button">Upload new image</button>
-=======
-              <div className="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-              <button className="btn button btn-primary" type="button">Upload new image</button>
->>>>>>> 02bb086faa0348e580bfde373fa70830b475f46b
             </div>
           </div>
         </div>
@@ -152,7 +161,18 @@ const UserProfile = () => {
                     onChange={handlebiochange}
                   />
                 </div>
-                <button className="btn button btn-primary" type="submit">Save changes</button>
+                  <h4>Update New Profile Picture</h4>
+                <FileBase type="file" id="fileInput" multiple={false} onDone={handleFileChange} />
+
+                        {images && (
+                            <div>
+                                {/* <img className='justify-content-center p-3' style={{ width: '70%', height: '100%' }} src={selectedFile.base64} alt="Preview Image" /> */}
+                                <button type="button" className='btn btn-danger my-2' onClick={() => handleDiscard()}>
+                                    Discard
+                                </button>
+                            </div>
+                        )}
+                <button className="btn button btn-primary " type="submit">Save changes</button>
               </form>
             </div>
           </div>
