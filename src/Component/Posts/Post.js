@@ -135,7 +135,7 @@ const Post = (props) => {
 
                 <h5 className="card-title"><i className="fa-regular fa-user m-2"></i>{name} ({moment(createdAt).fromNow()})</h5>
                 <RenderImg />
-                <p className="card-text card-title">{title}</p>
+                <p className="card-text card-title ms-3 py-2">{title}</p>
                 <div className="card-body">
                     <p className="card-text">{message}</p>
                     <RenderAction />

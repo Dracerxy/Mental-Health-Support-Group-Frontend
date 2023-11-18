@@ -7,7 +7,7 @@ const Structure = () => {
     const cards = Data.map(item => {
         return (
             <Resources
-                images={item.image}  // Change this to 'image'
+                images={item.image}  
                 type={item.type}
                 title={item.title}
                 text={item.description}
