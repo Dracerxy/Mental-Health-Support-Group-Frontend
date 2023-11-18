@@ -4,8 +4,8 @@ import UserProfile from './UserProfile'
 const Username = () => {
   return (
     <>
-    <UserProfile/>
-    <PostHistory/>
+      <UserProfile />
+      <PostHistory />
     </>
   )
 }

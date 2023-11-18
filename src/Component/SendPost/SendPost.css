@@ -12,6 +12,9 @@
     width: 70%;
     margin-left: 10px;
 }
+.btn-danger{
+    border: none;
+}
 form{
     width: 90%;
 }
