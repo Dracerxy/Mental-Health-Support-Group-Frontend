@@ -44,9 +44,11 @@ const Chat = () => {
                 </div>
                 <button className="btn btn-sm" type="submit"><i className="fa-regular fa-paper-plane"></i></button>
               </div>
+              <h2>To be Implemented in future</h2>
             </div>
           </div>
         </div>
+        <img src="https://cdn.dribbble.com/users/1544818/screenshots/12575677/media/c261ef2d5f6b3670baec70cba8002c02.png?resize=1600x1200&vertical=center" className="image"></img>
       </div>
     </div>
   )
