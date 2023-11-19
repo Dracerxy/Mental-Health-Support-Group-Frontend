@@ -60,7 +60,8 @@ const Login = () => {
   //   console.log(response);
   // }
 
-  const Client_id = "532674940364-m4dhtbblhrptl5flflotn74mkcqiidg3.apps.googleusercontent.com";
+  // const Client_id = "532674940364-m4dhtbblhrptl5flflotn74mkcqiidg3.apps.googleusercontent.com";
+  const Client_id = "1011172205462-bot4q5a7poad35depeo26nac6eqlmh2q.apps.googleusercontent.com";
 
   return (
     <>
