@@ -27,12 +27,14 @@ const LandingPage = () => {
 
     return (
         <div>
-            <div className="conatiner">
+            <div className="conatiner-fluid">
                 <div className="row">
+                    <div className='col-11'>
                     <ListPost/>
-                </div>
-                <div className="col col-chat">
-                <SendPost refresh={forceUpdate}/>
+                    </div>
+                    <div className="col-1">
+                        <SendPost refresh={forceUpdate}/>
+                    </div>
                 </div>
             </div>
         </div>

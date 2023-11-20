@@ -6,6 +6,7 @@
     position: fixed;
     overflow-x: visible;
     margin-top: 30px !important;
+    right: 0;
 }
 /* post-section{
     height: 70vh;
