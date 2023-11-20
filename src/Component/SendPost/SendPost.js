@@ -50,10 +50,10 @@ const SendPost = (props) => {
                 creator: user.email,
                 selectedFile: images
             });
+            props.refresh();
             setAlertMessage('Post created successfully!!');
             setAlertType('success');
             setShowAlert(true);
-            props.refresh()
         } catch (error) {
             setAlertMessage('Post not created successfully!!');
             setAlertType('failure');
