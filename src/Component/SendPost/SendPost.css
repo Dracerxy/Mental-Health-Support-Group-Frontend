@@ -1,4 +1,4 @@
-/* .post-section{
+.post-section{
     height: 80vh;
     width: 23%;
     padding: 10px;
@@ -6,9 +6,8 @@
     position: fixed;
     overflow-x: visible;
     margin-top: 30px !important;
-    right: 0;
-} */
-post-section{
+}
+/* post-section{
     height: 70vh;
     width: 23%;
     padding: 10px;
@@ -20,7 +19,7 @@ post-section{
     right: 0%;
     border-radius: 6px;
     color: black;
-}
+} */
 .post-image{
     height: 80%;
     width: 70%;
