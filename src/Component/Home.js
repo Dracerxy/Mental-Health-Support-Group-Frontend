@@ -14,9 +14,9 @@ const Home = () => {
           <LandingPage />
           </div>
         </div>
-        <div className="col col-chat">
+        {/* <div className="col col-chat">
           <SendPost />
-        </div>
+        </div> */}
       </div>
     </div>
   )

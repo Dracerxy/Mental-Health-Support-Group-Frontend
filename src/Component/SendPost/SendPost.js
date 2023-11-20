@@ -4,7 +4,7 @@ import ImagePreview from '../ImagePreview/ImagePreview';
 import axios from 'axios';
 import FileBase from 'react-file-base64';
 import CustomAlert from '../../custom/CustomAlert'
-const SendPost = () => {
+const SendPost = (props) => {
     const user = JSON.parse(localStorage.getItem('profile'));
     const [images, setImages] = useState('');
     const [title, setTitle] = useState("");
@@ -53,6 +53,7 @@ const SendPost = () => {
             setAlertMessage('Post created successfully!!');
             setAlertType('success');
             setShowAlert(true);
+            props.refresh()
         } catch (error) {
             setAlertMessage('Post not created successfully!!');
             setAlertType('failure');

@@ -76,6 +76,7 @@ const Post = (props) => {
             setAlertMessage('comment added!!');
             setAlertType('success');
             setShowAlert(true);
+            props.refresh();
         } catch (error) {
             setAlertMessage('comment not added!!');
             setAlertType('failure');
@@ -99,6 +100,7 @@ const Post = (props) => {
                 _id, email: userId
             });
             setCount(likes.length)
+            props.refresh();
         } catch (error) {
         }
     };
@@ -131,6 +133,7 @@ const Post = (props) => {
                 setAlertMessage('Comment deleted successfully:');
                 setAlertType('success');
                 setShowAlert(true);
+                props.refresh();
             })
             .catch(error => {
                 alert(error)
