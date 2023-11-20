@@ -29,8 +29,12 @@ const LandingPage = () => {
         <div>
             <div className="conatiner">
                 <div className="row">
+                    <div className='col-11'>
+                        <div className='row'>
                     <ListPost/>
-                    <div className="col">
+                    </div>
+                    </div>
+                    <div className="col-1">
                         <SendPost refresh={forceUpdate}/>
                     </div>
                 </div>
