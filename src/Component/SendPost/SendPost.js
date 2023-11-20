@@ -77,7 +77,7 @@ const SendPost = (props) => {
                 onClose={handleCloseAlert}
                 type={alertType}
             />
-            <form onSubmit={CreatePost}>
+            <form onSubmit={CreatePost} className="was-validated">
                 <h6 className="title"><i className="fa-regular fa-user m-2"></i>{user?.usr}</h6>
                 <label htmlFor="form" className='post-heading' >Post Here</label>
 
@@ -95,9 +95,14 @@ const SendPost = (props) => {
                     </div>
                 </div>
                 <div>
-                    <input className="form-control caption" type="text" placeholder="Title of the post" value={title} onChange={handleTitle} />
-                    <input className="form-control caption" type="text" placeholder="Write something here" value={content} onChange={handleContent} />
-
+                    <input className="form-control caption" type="text" placeholder="Title of the post" value={title} onChange={handleTitle} required />
+                    <div className="invalid-feedback">
+                        Please provide a title for the post.
+                    </div>
+                    <input className="form-control caption" type="text" placeholder="Write something here" value={content} onChange={handleContent} required />
+                    <div className="invalid-feedback">
+                        Please write something in the post.
+                    </div>
                     <div className="send-button p-2 d-flex justify-content-end mx-4">
                         <button className="btn send btn-sm" type="submit"><i className="fa-regular fa-paper-plane"></i></button>
                     </div>

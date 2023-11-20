@@ -23,3 +23,8 @@ textarea{
     background-color: var(--dark);
     color: white;
 }
+.image{
+    width: 1170px;
+    margin-left:370px;
+    margin-top:-500px;
+}
