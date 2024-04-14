@@ -10,6 +10,8 @@ const UserProfile = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [images, setImages] = useState('');
   const [expert, setexpert] = useState(false)
+  const [mfaEnabled, setMfaEnabled] = useState(false);
+
 
   const handleFileChange = (file) => {
     // `file.base64` contains the base64 representation of the selected file
@@ -37,6 +39,7 @@ const UserProfile = () => {
           setexpert(userData.expert);
           setbio(userData.bioData);
           setImages(userData.profilePicture)
+          setMfaEnabled(userData.MFA)
         } else {
           alert('User not found');
         }
@@ -65,17 +68,21 @@ const UserProfile = () => {
   const handleExpertChange = (value) => {
     setexpert(value);
   };
+  const handleMFAChange = (value) => {
+    setMfaEnabled(value);
+  };
   const handleSaveChanges = async (e) => {
     try {
       await axios.put('https://mindwell-connect-backend.onrender.com/app/update-users/' + user.email, {
         name,
         bioData: bio,
         expert,
-        profilePicture:images
+        profilePicture:images,
+        MFA:mfaEnabled
       });
       console.log('User data updated successfully');
     } catch (error) {
-      alert("please wait!!!")
+      alert(error)
     }
   };
 
@@ -161,6 +168,39 @@ const UserProfile = () => {
                     onChange={handlebiochange}
                   />
                 </div>
+                <div className="mb-3">
+                    <label className="small mb-1" htmlFor="inputExpert">
+                     MFA
+                    </label>
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        id="MFAYes"
+                        name="MFA"
+                        value={true}
+                        checked={mfaEnabled === true}
+                        onChange={() => handleMFAChange(true)}
+                      />
+                      <label className="form-check-label" htmlFor="MFAYes">
+                        Yes
+                      </label>
+                    </div>
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        id="MFANo"
+                        name="MFA"
+                        value={false}
+                        checked={mfaEnabled === false}
+                        onChange={() => handleMFAChange(false)}
+                      />
+                      <label className="form-check-label" htmlFor="MFANo">
+                        No
+                      </label>
+                    </div>
+                  </div>
                   <h4>Update New Profile Picture</h4>
                 <FileBase type="file" id="fileInput" multiple={false} onDone={handleFileChange} />
 
