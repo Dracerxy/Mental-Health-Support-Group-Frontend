@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Userprofile.css'
 import FileBase from 'react-file-base64';
+import QRCodeDisplay from '../qr/QRCodeDisplay';
 import axios from 'axios'
 const UserProfile = () => {
   const user = JSON.parse(localStorage.getItem('profile'));
@@ -11,6 +12,9 @@ const UserProfile = () => {
   const [images, setImages] = useState('');
   const [expert, setexpert] = useState(false)
   const [mfaEnabled, setMfaEnabled] = useState(false);
+  const [dappAddress, setDappAddress] = useState('');
+  const [showQRCode, setShowQRCode] = useState(false); 
+  const [qrCodeValue, setQRCodeValue] = useState('');
 
 
   const handleFileChange = (file) => {
@@ -40,6 +44,7 @@ const UserProfile = () => {
           setbio(userData.bioData);
           setImages(userData.profilePicture)
           setMfaEnabled(userData.MFA)
+          setDappAddress(userData.dapp_address)
         } else {
           alert('User not found');
         }
@@ -51,6 +56,30 @@ const UserProfile = () => {
     // Call the fetchUserData function
     fetchUserData();
   }, [user.email]);
+
+  const handleUpdateDappAddress = async () => {
+    try {
+      const response = await axios.post('https://mindwell-connect-backend.onrender.com/app/generateToken', {
+        email: user.email
+      });
+
+      // Assuming the API response contains a property called 'token'
+      const { token } = response.data;
+
+      // Update the QR code value with the token
+      setQRCodeValue(token);
+      
+      // Set showQRCode to true to display the QR code
+      setShowQRCode(true);
+      
+      console.log('Update request sent successfully');
+    } catch (error) {
+      console.error('Error sending update request:', error);
+      // Handle errors or display error messages here
+    }
+  };
+
+  
 
   // const handleInputChange = (e) => {
   //   const { name, value, type, checked } = e.target;
@@ -73,18 +102,22 @@ const UserProfile = () => {
   };
   const handleSaveChanges = async (e) => {
     try {
-      await axios.put('https://mindwell-connect-backend.onrender.com/app/update-users/' + user.email, {
-        name,
-        bioData: bio,
-        expert,
-        profilePicture:images,
-        MFA:mfaEnabled
-      });
-      console.log('User data updated successfully');
+      if (dappAddress.trim() !== '') {
+        await axios.put('https://mindwell-connect-backend.onrender.com/app/update-users/' + user.email, {
+          name,
+          bioData: bio,
+          expert,
+          profilePicture: images,
+          MFA: mfaEnabled
+        });
+      } else {
+        alert('DApp address is empty. Skipping update.');
+      }
     } catch (error) {
-      alert(error)
+      alert("please wait...");
     }
   };
+  
 
   return (
     <div className="container-xl px-4 mt-4">
@@ -201,6 +234,33 @@ const UserProfile = () => {
                       </label>
                     </div>
                   </div>
+                  {mfaEnabled && (
+                    <div className="mb-3">
+                      <label className="small mb-1" htmlFor="inputDappAddress">DApp Address</label>
+                      <div className="input-group">
+                        <input
+                          className="form-control"
+                          id="inputDappAddress"
+                          type="text"
+                          defaultValue={dappAddress}
+                          readOnly
+                        />
+                        <button
+                          className="btn btn-outline-primary"
+                          type="button"
+                          onClick={handleUpdateDappAddress}
+                        >
+                          Request Update
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                  {showQRCode && (
+                    <div className="mb-3">
+                      <label className="small mb-1">QR Code</label>
+                      <QRCodeDisplay value={qrCodeValue} />
+                    </div>
+                  )}
                   <h4>Update New Profile Picture</h4>
                 <FileBase type="file" id="fileInput" multiple={false} onDone={handleFileChange} />
 

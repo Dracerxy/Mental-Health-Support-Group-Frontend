@@ -16,6 +16,8 @@ const Login = () => {
   const [alertType, setAlertType] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [mfa,setmfa]=useState(false);
   const navigate = useNavigate();
   const handleCloseAlert = () => {
     setShowAlert(false);
@@ -24,37 +26,76 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when login process starts
     try {
       const response = await axios.post('https://mindwell-connect-backend.onrender.com/app/login', {
         email,
         password,
       });
-      const token=response.data.token;
-      const usr=response.data.username;
-      dispatch({ type:"AUTH", data: { usr, token ,id:false,email:response.data.email }});
-      navigate('/');
-      window.location.reload();
+
+      const token = response.data.token;
+      const username = response.data.username;
+      setmfa(response.data.mfa);
+      const mfar=response.data.mfa;
+      const address=response.data.address;
+      const dapp_address=response.data.dapp_address;
+      if (mfar) {
+        const mfaResponse = await axios.post('https://blockchain-server-4s4u.onrender.com/contract/initiateMFA', {
+          address,
+          dapp_address
+        });
+
+        if (mfaResponse.status === 200) {
+          dispatch({ type: "AUTH", data: { username, token, id: false, email: response.data.email } });
+          navigate('/');
+          window.location.reload();
+        } else {
+          navigate('/login');
+          setAlertMessage('MFA Failed. Please try again.');
+          setAlertType('failure');
+          setShowAlert(true);
+        }
+      } else {
+        dispatch({ type: "AUTH", data: { username, token, id: false, email: response.data.email } });
+        navigate('/');
+        window.location.reload();
+      }
     } catch (error) {
-      if(error.response.status === 404){
-      // alert('Login failed!', error);
+      if (error.response.status === 404) {
         setAlertMessage('User Not Exists!!');
         setAlertType('failure');
         setShowAlert(true);
-      }else if(error.response.status ===401){
+      } else if (error.response.status === 401) {
         setAlertMessage('Password Incorrect!!');
         setAlertType('failure');
         setShowAlert(true);
-      }else if(error.response.status===402){
-        setAlertMessage('User May Used Google Authentication For Login in!!');
+      } else if (error.response.status === 402) {
+        setAlertMessage('User May Have Used Google Authentication For Login!');
         setAlertType('failure');
         setShowAlert(true);
-      }else{
-        setAlertMessage('Something Went Worng! Try Again Later!');
+      } else {
+        setAlertMessage('Something Went Wrong! Try Again Later!');
         setAlertType('failure');
         setShowAlert(true);
       }
+    } finally {
+      setLoading(false); // Set loading to false after login process completes
     }
-  }
+  };
+  const renderLoading = () => {
+    if (loading) {
+      let loadingText = mfa ? "Initiating MFA... Please wait..." : "Logging in... Please wait...";
+      return (
+        <div className="text-center">
+         <button class="btn btn-primary" type="button" disabled>
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+            {loadingText}
+          </button>
+        </div>
+      );
+    }
+    return null;
+  };
 
   // const responseGoogle = (response) => {
   //   console.log(response);
@@ -118,6 +159,7 @@ const Login = () => {
                             <p><Link to="/signup" className="link-dark link-underline-opacity-0">Register here</Link></p>
                           </div>
                         </form>
+                        {renderLoading()} 
                       </div>
                     </div>
                   </div>
